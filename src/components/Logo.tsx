@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Logo({ width = 130, height = 44 }: { width?: number; height?: number }) {
@@ -11,12 +10,13 @@ export default function Logo({ width = 130, height = 44 }: { width?: number; hei
   }
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src="/logo.png"
       alt="Neostore"
       width={width}
       height={height}
-      className="object-contain"
+      style={{ objectFit: 'contain', maxHeight: height }}
       onError={() => setError(true)}
     />
   );
