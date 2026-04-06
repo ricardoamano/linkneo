@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { put } from '@vercel/blob';
 import * as db from './db';
 
 function slugify(value: string): string {
@@ -13,15 +14,28 @@ function slugify(value: string): string {
     .replace(/-+/g, '-');
 }
 
+async function resolveAvatar(formData: FormData): Promise<string | null> {
+  const file = formData.get('avatar_file') as File | null;
+
+  if (file && file.size > 0) {
+    const ext = file.name.split('.').pop() ?? 'jpg';
+    const filename = `avatars/${Date.now()}.${ext}`;
+    const blob = await put(filename, file, { access: 'public' });
+    return blob.url;
+  }
+
+  return (formData.get('avatar') as string)?.trim() || null;
+}
+
 // ─── Profile Actions ────────────────────────────────────────────────────────
 
 export async function createProfileAction(formData: FormData): Promise<void> {
   const name = (formData.get('name') as string).trim();
   const rawSlug = (formData.get('slug') as string).trim();
   const description = (formData.get('description') as string)?.trim() || null;
-  const avatar = (formData.get('avatar') as string)?.trim() || null;
   const bg_color = (formData.get('bg_color') as string)?.trim() || null;
   const slug = slugify(rawSlug || name);
+  const avatar = await resolveAvatar(formData);
 
   await db.createProfile({ slug, name, description, avatar, bg_color });
 
@@ -36,9 +50,9 @@ export async function updateProfileAction(formData: FormData): Promise<void> {
   const name = (formData.get('name') as string).trim();
   const rawSlug = (formData.get('slug') as string).trim();
   const description = (formData.get('description') as string)?.trim() || null;
-  const avatar = (formData.get('avatar') as string)?.trim() || null;
   const bg_color = (formData.get('bg_color') as string)?.trim() || null;
   const slug = slugify(rawSlug || name);
+  const avatar = await resolveAvatar(formData);
 
   await db.updateProfile(id, { slug, name, description, avatar, bg_color });
 
