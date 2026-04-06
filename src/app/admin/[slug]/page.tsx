@@ -17,29 +17,27 @@ export default async function AdminProfilePage({ params }: Props) {
   if (!profile) notFound();
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-6">
-      <div className="flex items-center gap-3 mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{profile.name}</h1>
-          <Link
-            href={`/${profile.slug}`}
-            target="_blank"
-            className="text-sm text-indigo-500 hover:underline"
-          >
-            /{profile.slug}
-          </Link>
-        </div>
+    <div className="px-4 py-8 md:px-8 md:py-10">
+      <div className="mb-6">
+        <h1 className="text-xl font-bold text-white">{profile.name}</h1>
+        <Link
+          href={`/${profile.slug}`}
+          target="_blank"
+          className="text-sm text-indigo-400 hover:underline"
+        >
+          /{profile.slug}
+        </Link>
       </div>
 
       {/* Edit profile */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-5">Editar perfil</h2>
+      <div className="bg-white rounded-xl p-5 md:p-6 mb-4">
+        <h2 className="text-base font-semibold text-gray-900 mb-5">Editar perfil</h2>
         <ProfileForm profile={profile} />
       </div>
 
       {/* Links list */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-5">Links</h2>
+      <div className="bg-white rounded-xl p-5 md:p-6 mb-4">
+        <h2 className="text-base font-semibold text-gray-900 mb-5">Links</h2>
         {profile.links.length === 0 ? (
           <p className="text-gray-400 text-sm">Nenhum link adicionado ainda.</p>
         ) : (
@@ -48,8 +46,8 @@ export default async function AdminProfilePage({ params }: Props) {
       </div>
 
       {/* Add link */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-5">Adicionar link</h2>
+      <div className="bg-white rounded-xl p-5 md:p-6">
+        <h2 className="text-base font-semibold text-gray-900 mb-5">Adicionar link</h2>
         <LinkForm profileId={profile.id} profileSlug={profile.slug} />
       </div>
     </div>

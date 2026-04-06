@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllProfiles } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
@@ -7,48 +8,80 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const profiles = await getAllProfiles();
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-60 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-        <div className="px-5 py-4 border-b border-gray-200">
-          <Link href="/" className="text-lg font-bold text-indigo-600">
-            Linkneo
-          </Link>
-          <span className="ml-2 text-xs text-gray-400 uppercase tracking-wide">Admin</span>
-        </div>
+    <div className="min-h-screen bg-black">
+      {/* Mobile top bar */}
+      <header className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-gray-800">
+        <Link href="/">
+          <Image src="/logo.png" alt="Neostore" width={120} height={40} className="object-contain" />
+        </Link>
+        <span className="text-xs text-gray-500 uppercase tracking-wide ml-1">Admin</span>
+      </header>
 
-        <nav className="flex-1 overflow-y-auto py-3 px-3">
+      {/* Mobile nav — horizontal scroll */}
+      <nav className="md:hidden flex gap-2 px-4 py-2 overflow-x-auto border-b border-gray-800 scrollbar-none">
+        <Link
+          href="/admin"
+          className="flex-shrink-0 px-3 py-1.5 rounded-full bg-gray-800 text-gray-300 text-xs font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
+        >
+          + Novo perfil
+        </Link>
+        {profiles.map((p) => (
           <Link
-            href="/admin"
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors mb-1"
+            key={p.id}
+            href={`/admin/${p.slug}`}
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-800 text-gray-300 text-xs font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
           >
-            + Novo perfil
+            {p.avatar && !p.avatar.startsWith('http') && (
+              <span className="text-sm leading-none">{p.avatar}</span>
+            )}
+            {p.name}
           </Link>
+        ))}
+      </nav>
 
-          {profiles.length > 0 && (
-            <>
-              <p className="px-3 py-1 text-xs text-gray-400 uppercase tracking-wide mt-2">
-                Perfis
-              </p>
-              {profiles.map((p) => (
-                <Link
-                  key={p.id}
-                  href={`/admin/${p.slug}`}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  {p.avatar && !p.avatar.startsWith('http') && (
-                    <span className="text-base leading-none">{p.avatar}</span>
-                  )}
-                  <span className="truncate">{p.name}</span>
-                </Link>
-              ))}
-            </>
-          )}
-        </nav>
-      </aside>
+      <div className="md:flex">
+        {/* Desktop sidebar */}
+        <aside className="hidden md:flex w-56 flex-col flex-shrink-0 min-h-screen border-r border-gray-800">
+          <div className="px-5 py-5 border-b border-gray-800">
+            <Link href="/">
+              <Image src="/logo.png" alt="Neostore" width={130} height={44} className="object-contain" />
+            </Link>
+            <span className="block mt-1 text-xs text-gray-500 uppercase tracking-wide">Admin</span>
+          </div>
 
-      {/* Main */}
-      <main className="flex-1 overflow-y-auto">{children}</main>
+          <nav className="flex-1 py-3 px-3 overflow-y-auto">
+            <Link
+              href="/admin"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition-colors mb-1"
+            >
+              + Novo perfil
+            </Link>
+
+            {profiles.length > 0 && (
+              <>
+                <p className="px-3 py-1 text-xs text-gray-600 uppercase tracking-wide mt-2 mb-1">
+                  Perfis
+                </p>
+                {profiles.map((p) => (
+                  <Link
+                    key={p.id}
+                    href={`/admin/${p.slug}`}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+                  >
+                    {p.avatar && !p.avatar.startsWith('http') && (
+                      <span className="text-base leading-none">{p.avatar}</span>
+                    )}
+                    <span className="truncate">{p.name}</span>
+                  </Link>
+                ))}
+              </>
+            )}
+          </nav>
+        </aside>
+
+        {/* Main content */}
+        <main className="flex-1 min-w-0">{children}</main>
+      </div>
     </div>
   );
 }
