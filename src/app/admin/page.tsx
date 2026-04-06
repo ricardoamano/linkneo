@@ -56,7 +56,6 @@ export default async function AdminPage() {
                         <button
                           type="submit"
                           className="text-red-400 hover:text-red-600 transition-colors"
-                          onClick={() => {}}
                         >
                           Excluir
                         </button>
