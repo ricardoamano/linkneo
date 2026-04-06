@@ -16,7 +16,7 @@ export async function getProfileBySlug(slug: string): Promise<ProfileWithLinks |
   const db = sql();
   const rows = await db`
     SELECT
-      p.id, p.slug, p.name, p.description, p.avatar, p.created_at,
+      p.id, p.slug, p.name, p.description, p.avatar, p.bg_color, p.created_at,
       l.id AS link_id, l.title, l.url, l.icon, l.sort_order, l.profile_id, l.created_at AS link_created_at
     FROM profiles p
     LEFT JOIN links l ON l.profile_id = p.id
@@ -33,6 +33,7 @@ export async function getProfileBySlug(slug: string): Promise<ProfileWithLinks |
     name: first.name,
     description: first.description,
     avatar: first.avatar,
+    bg_color: first.bg_color,
     created_at: first.created_at,
     links: [],
   };
@@ -59,11 +60,12 @@ export async function createProfile(data: {
   name: string;
   description: string | null;
   avatar: string | null;
+  bg_color: string | null;
 }): Promise<Profile> {
   const db = sql();
   const rows = await db`
-    INSERT INTO profiles (slug, name, description, avatar)
-    VALUES (${data.slug}, ${data.name}, ${data.description}, ${data.avatar})
+    INSERT INTO profiles (slug, name, description, avatar, bg_color)
+    VALUES (${data.slug}, ${data.name}, ${data.description}, ${data.avatar}, ${data.bg_color})
     RETURNING *
   `;
   return rows[0] as Profile;
@@ -71,12 +73,12 @@ export async function createProfile(data: {
 
 export async function updateProfile(
   id: number,
-  data: { slug: string; name: string; description: string | null; avatar: string | null }
+  data: { slug: string; name: string; description: string | null; avatar: string | null; bg_color: string | null }
 ): Promise<Profile> {
   const db = sql();
   const rows = await db`
     UPDATE profiles
-    SET slug = ${data.slug}, name = ${data.name}, description = ${data.description}, avatar = ${data.avatar}
+    SET slug = ${data.slug}, name = ${data.name}, description = ${data.description}, avatar = ${data.avatar}, bg_color = ${data.bg_color}
     WHERE id = ${id}
     RETURNING *
   `;

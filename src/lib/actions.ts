@@ -20,9 +20,10 @@ export async function createProfileAction(formData: FormData): Promise<void> {
   const rawSlug = (formData.get('slug') as string).trim();
   const description = (formData.get('description') as string)?.trim() || null;
   const avatar = (formData.get('avatar') as string)?.trim() || null;
+  const bg_color = (formData.get('bg_color') as string)?.trim() || null;
   const slug = slugify(rawSlug || name);
 
-  await db.createProfile({ slug, name, description, avatar });
+  await db.createProfile({ slug, name, description, avatar, bg_color });
 
   revalidatePath('/');
   revalidatePath('/admin');
@@ -36,9 +37,10 @@ export async function updateProfileAction(formData: FormData): Promise<void> {
   const rawSlug = (formData.get('slug') as string).trim();
   const description = (formData.get('description') as string)?.trim() || null;
   const avatar = (formData.get('avatar') as string)?.trim() || null;
+  const bg_color = (formData.get('bg_color') as string)?.trim() || null;
   const slug = slugify(rawSlug || name);
 
-  await db.updateProfile(id, { slug, name, description, avatar });
+  await db.updateProfile(id, { slug, name, description, avatar, bg_color });
 
   revalidatePath('/');
   revalidatePath('/admin');

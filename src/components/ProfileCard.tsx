@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Profile } from '@/types';
 
 interface Props {
@@ -7,9 +8,21 @@ interface Props {
 
 export default function ProfileCard({ profile, children }: Props) {
   const isUrl = profile.avatar?.startsWith('http');
+  const bgColor = profile.bg_color ?? '#7c3aed';
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-500 to-indigo-600 px-4 py-12">
+    <main
+      className="min-h-screen flex items-center justify-center px-4 py-12"
+      style={{ backgroundColor: bgColor }}
+    >
+      {/* Back button */}
+      <Link
+        href="/"
+        className="fixed top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/20 hover:bg-black/30 text-white text-sm transition-colors backdrop-blur-sm"
+      >
+        ← Voltar
+      </Link>
+
       <div className="w-full max-w-md flex flex-col items-center gap-3">
         {/* Avatar */}
         <div className="mb-1">

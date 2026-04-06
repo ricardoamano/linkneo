@@ -29,7 +29,7 @@ export default function ProfileForm({ profile }: Props) {
       {profile && <input type="hidden" name="id" value={profile.id} />}
       {profile && <input type="hidden" name="oldSlug" value={profile.slug} />}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700">Nome *</label>
           <input
@@ -48,7 +48,7 @@ export default function ProfileForm({ profile }: Props) {
             name="slug"
             type="text"
             defaultValue={profile?.slug ?? ''}
-            placeholder="ex: produto (auto a partir do nome)"
+            placeholder="ex: produto"
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </div>
@@ -65,15 +65,30 @@ export default function ProfileForm({ profile }: Props) {
         />
       </div>
 
-      <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium text-gray-700">Avatar</label>
-        <input
-          name="avatar"
-          type="text"
-          defaultValue={profile?.avatar ?? ''}
-          placeholder="🚀  ou  https://exemplo.com/foto.jpg"
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium text-gray-700">Avatar</label>
+          <input
+            name="avatar"
+            type="text"
+            defaultValue={profile?.avatar ?? ''}
+            placeholder="🚀  ou  https://exemplo.com/foto.jpg"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium text-gray-700">Cor de fundo da página</label>
+          <div className="flex items-center gap-3">
+            <input
+              name="bg_color"
+              type="color"
+              defaultValue={profile?.bg_color ?? '#7c3aed'}
+              className="w-10 h-10 rounded-lg border border-gray-300 cursor-pointer p-0.5"
+            />
+            <span className="text-xs text-gray-400">Clique para escolher a cor</span>
+          </div>
+        </div>
       </div>
 
       <div className="flex justify-end gap-3 pt-2">

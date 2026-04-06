@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { getAllProfiles } from '@/lib/db';
 import ProfileListItem from '@/components/ProfileListItem';
+import Logo from '@/components/Logo';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +13,7 @@ export default async function HomePage() {
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <Link href="/">
-            <Image src="/logo.png" alt="Neostore" width={140} height={48} className="object-contain" />
+            <Logo width={140} height={48} />
           </Link>
           <Link
             href="/admin"

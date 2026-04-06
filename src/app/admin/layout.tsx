@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { getAllProfiles } from '@/lib/db';
+import Logo from '@/components/Logo';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +12,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       {/* Mobile top bar */}
       <header className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-gray-800">
         <Link href="/">
-          <Image src="/logo.png" alt="Neostore" width={120} height={40} className="object-contain" />
+          <Logo width={120} height={40} />
         </Link>
         <span className="text-xs text-gray-500 uppercase tracking-wide ml-1">Admin</span>
       </header>
@@ -44,7 +44,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <aside className="hidden md:flex w-56 flex-col flex-shrink-0 min-h-screen border-r border-gray-800">
           <div className="px-5 py-5 border-b border-gray-800">
             <Link href="/">
-              <Image src="/logo.png" alt="Neostore" width={130} height={44} className="object-contain" />
+              <Logo width={130} height={44} />
             </Link>
             <span className="block mt-1 text-xs text-gray-500 uppercase tracking-wide">Admin</span>
           </div>

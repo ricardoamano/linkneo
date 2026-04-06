@@ -4,6 +4,7 @@ export interface Profile {
   name: string;
   description: string | null;
   avatar: string | null;
+  bg_color: string | null;
   created_at: string;
 }
 
