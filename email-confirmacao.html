@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Confirmação de agendamento</title>
+    <style>
+      body, table, td, a {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+
+      table, td {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+
+      img {
+        -ms-interpolation-mode: bicubic;
+        border: 0;
+        outline: none;
+        text-decoration: none;
+        display: block;
+      }
+
+      table {
+        border-collapse: collapse !important;
+      }
+
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: #efefef;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #222222;
+      }
+
+      .wrapper {
+        width: 100%;
+        background-color: #efefef;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        background-color: #ffffff;
+      }
+
+      .content {
+        padding: 28px 24px;
+      }
+
+      .text {
+        font-size: 16px;
+        line-height: 24px;
+        color: #333333;
+      }
+
+      .small {
+        font-size: 14px;
+        line-height: 22px;
+        color: #555555;
+      }
+
+      .section-title {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        color: #222222;
+      }
+
+      .button {
+        display: inline-block;
+        background-color: #ffffff;
+        color: #222222 !important;
+        text-decoration: none;
+        padding: 12px 18px;
+        border: 1px solid #cfcfcf;
+        border-radius: 6px;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .warning {
+        font-size: 14px;
+        line-height: 22px;
+        color: #444444;
+      }
+
+      @media screen and (max-width: 600px) {
+        .content {
+          padding: 24px 18px !important;
+        }
+
+        .footer-stack {
+          display: block !important;
+          width: 100% !important;
+          text-align: center !important;
+        }
+
+        .footer-stack-spacer {
+          display: block !important;
+          width: 100% !important;
+          height: 20px !important;
+          line-height: 20px !important;
+        }
+
+        .footer-social table {
+          margin: 0 auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" class="wrapper">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" class="container">
+
+            <!-- HEADER -->
+            <tr>
+              <td style="background-color: #00543c; padding: 0;">
+                <img
+                  src="https://5130edf5e5d7bfba04ffcf8597a4a5bc.cdn.bubble.io/f1775508236439x761004239394040300/header.png"
+                  alt="Um encontro que gera negócios"
+                  width="600"
+                  style="display: block; width: 100%; max-width: 600px; height: auto;"
+                />
+              </td>
+            </tr>
+
+            <!-- BODY -->
+            <tr>
+              <td class="content">
+                <div class="text" style="font-weight: 700;">Olá! Tudo bem?</div>
+                <div style="height: 18px; line-height: 18px; font-size: 18px;">&nbsp;</div>
+
+                <div class="small">
+                  Sua reunião com o time Stone no VTEX Day 2026 está confirmada e estamos te esperando para um momento de troca e negócios no nosso camarote.
+                </div>
+
+                <div style="height: 22px; line-height: 22px; font-size: 22px;">&nbsp;</div>
+
+                <div class="section-title">Detalhes do seu agendamento:</div>
+                <div style="height: 10px; line-height: 10px; font-size: 10px;">&nbsp;</div>
+
+                <div class="small">
+                  • Data: {{ params.data }}<br />
+                  • Horário: {{ params.horario }}<br />
+                  • Consultor: {{ params.consultor }}<br />
+                  • Local: {{ params.local }}
+                </div>
+
+                <div style="height: 22px; line-height: 22px; font-size: 22px;">&nbsp;</div>
+
+                <div class="small">
+                  Para facilitar sua experiência, você pode adicionar este compromisso à sua agenda:
+                </div>
+
+                <div style="height: 14px; line-height: 14px; font-size: 14px;">&nbsp;</div>
+
+                <a href="{{ params.calendar_link }}" target="_blank" class="button">Adicionar ao calendário</a>
+
+                <div style="height: 26px; line-height: 26px; font-size: 26px;">&nbsp;</div>
+
+                <div class="section-title">Importante para seu acesso:</div>
+                <div style="height: 8px; line-height: 8px; font-size: 8px;">&nbsp;</div>
+
+                <div class="warning">
+                  No dia da sua reunião, será necessário apresentar o QR Code abaixo para entrada no camarote. Ele é o seu identificador de acesso.
+                </div>
+
+                <div style="height: 24px; line-height: 24px; font-size: 24px;">&nbsp;</div>
+
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td align="center">
+                      <img src="{{ params.qr_code_url }}" alt="QR Code de acesso" width="120" style="width: 120px; max-width: 120px; height: auto;" />
+                    </td>
+                  </tr>
+                </table>
+
+                <div style="height: 28px; line-height: 28px; font-size: 28px;">&nbsp;</div>
+
+                <div class="text">
+                  Nos vemos em breve!<br />
+                  <strong>Time Stone</strong>
+                </div>
+              </td>
+            </tr>
+
+            <!-- FOOTER -->
+            <tr>
+              <td style="background-color: #00543c; padding: 40px 36px;">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td class="footer-stack" valign="middle" align="left" style="padding: 0;">
+                      <img
+                        src="https://5130edf5e5d7bfba04ffcf8597a4a5bc.cdn.bubble.io/f1775509098002x943174966778991700/footer_brand.png"
+                        alt="Stone e Pagar.me"
+                        width="229"
+                        style="display: block; width: 229px; max-width: 100%; height: auto;"
+                      />
+                    </td>
+                    <td class="footer-stack-spacer" width="42" style="font-size: 0; line-height: 0;">&nbsp;</td>
+                    <td class="footer-stack footer-social" valign="middle" align="left" style="padding: 0; width: 147px;">
+                      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="left" style="padding: 0 15px 9px 0;">
+                            <a href="https://www.instagram.com/stone/" target="_blank" style="display: block; text-decoration: none;">
+                              <img
+                                src="https://5130edf5e5d7bfba04ffcf8597a4a5bc.cdn.bubble.io/f1775509106221x317307056969862850/footer_instagram.png"
+                                alt="Instagram"
+                                width="33"
+                                style="display: block; width: 33px; max-width: 33px; height: auto;"
+                              />
+                            </a>
+                          </td>
+                          <td align="left" style="padding: 0 14px 9px 0;">
+                            <a href="https://br.linkedin.com/company/stone-co" target="_blank" style="display: block; text-decoration: none;">
+                              <img
+                                src="https://5130edf5e5d7bfba04ffcf8597a4a5bc.cdn.bubble.io/f1775509112615x912947599259998100/footer_linkedin.png"
+                                alt="LinkedIn"
+                                width="33"
+                                style="display: block; width: 33px; max-width: 33px; height: auto;"
+                              />
+                            </a>
+                          </td>
+                          <td align="left" style="padding: 0 0 9px 0;">
+                            <a href="https://www.stone.com.br/" target="_blank" style="display: block; text-decoration: none;">
+                              <img
+                                src="https://5130edf5e5d7bfba04ffcf8597a4a5bc.cdn.bubble.io/f1775509131481x991908534515038100/footer_website.png"
+                                alt="Site Stone"
+                                width="33"
+                                style="display: block; width: 33px; max-width: 33px; height: auto;"
+                              />
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" align="left" style="padding: 0;">
+                            <img
+                              src="https://5130edf5e5d7bfba04ffcf8597a4a5bc.cdn.bubble.io/f1775509125087x567918498170414400/footer_social_text.png"
+                              alt="Acompanhe nossos canais"
+                              width="147"
+                              style="display: block; width: 147px; max-width: 100%; height: auto;"
+                            />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
